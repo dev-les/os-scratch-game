@@ -38,7 +38,7 @@ class Config {
 	}
 
 	public getAssetsPath = (): string => {
-		return this.settings.assetsPath;
+		return process.env.NODE_ENV === 'production' ? this.settings.prodAssetsPath : this.settings.assetsPath;
 	}
 
 	public getBonusImages(bonus: number): Array<string> {

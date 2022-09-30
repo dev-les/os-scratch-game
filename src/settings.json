@@ -1,5 +1,6 @@
 {
 	"assetsPath": "/assets",
+	"prodAssetsPath":"/os-scratch-game/assets",
 	"assetsList": [
 		"img/magic_forest_bg.jpg",
 		"img/magic_forest_win_up_to_100.png",

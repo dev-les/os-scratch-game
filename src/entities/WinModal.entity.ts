@@ -42,15 +42,23 @@ export class WinModalEntity {
 
 	public setWinValue(win: WinType): void {
 		this.win = win
-		this.resultCoinsEntity.setText(String(this.win.coin))
+		// this.resultCoinsEntity.setText(String(this.win.coin))
+		const freeShipping =  this.win.cash == 1
+		if(freeShipping){
+			this.cashIco.sprite.visible = !freeShipping
+			this.resultCacheEntity.setText("Free Shipping")
+			return
+		}
 		this.resultCacheEntity.setText(String(this.win.cash))
+	}
+	public setLoseValue(): void {
+		this.cashIco.sprite.visible = false
+		this.messageEntity.setText("NO WIN")
 	}
 
 	public reRender = (): void => {
 		this.bgFrame.reRender()
 		this.messageEntity.reRender()
-		this.resultCoinsEntity.reRender()
-		this.coinIco.reRender()
 		this.resultCacheEntity.reRender()
 		this.cashIco.reRender()
 	}
@@ -84,24 +92,24 @@ export class WinModalEntity {
 		this.messageEntity.text.anchor.set(0.5, 0.5)
 		this.container.addChild(this.messageEntity.text)
 
-		const resultCoinsPosition = movePoint(messagePosition, [-150, 120])
-		this.resultCoinsEntity = new TextEntity(this.viewPort, {
-			name: 'roundCoinsResult',
-			position: resultCoinsPosition,
-			text: '',
-			style: resultWinStyle
-		})
-		this.resultCoinsEntity.text.anchor.set(0.5, 0.5)
-		this.container.addChild(this.resultCoinsEntity.text)
-		this.coinIco = new SpriteEntity(this.viewPort, {
-			name: 'coinIco',
-			texture: this.settings.coinTexture,
-			position: movePoint(resultCoinsPosition, [130, 0])
-		})
-		this.coinIco.sprite.anchor.set(0.5, 0.5)
-		this.container.addChild(this.coinIco.sprite)
+		// const resultCoinsPosition = movePoint(messagePosition, [-150, 120])
+		// this.resultCoinsEntity = new TextEntity(this.viewPort, {
+		// 	name: 'roundCoinsResult',
+		// 	position: resultCoinsPosition,
+		// 	text: '',
+		// 	style: resultWinStyle
+		// })
+		// this.resultCoinsEntity.text.anchor.set(0.5, 0.5)
+		// this.container.addChild(this.resultCoinsEntity.text)
+		// this.coinIco = new SpriteEntity(this.viewPort, {
+		// 	name: 'coinIco',
+		// 	texture: this.settings.coinTexture,
+		// 	position: movePoint(resultCoinsPosition, [130, 0])
+		// })
+		// this.coinIco.sprite.anchor.set(0.5, 0.5)
+		// this.container.addChild(this.coinIco.sprite)
 
-		const resultCachePosition = movePoint(messagePosition, [150, 120])
+		const resultCachePosition = movePoint(messagePosition, [0, 120])
 		this.resultCacheEntity = new TextEntity(this.viewPort, {
 			name: 'roundCacheResult',
 			position: resultCachePosition,
@@ -111,9 +119,9 @@ export class WinModalEntity {
 		this.resultCacheEntity.text.anchor.set(0.5, 0.5)
 		this.container.addChild(this.resultCacheEntity.text)
 		this.cashIco = new SpriteEntity(this.viewPort, {
-			name: 'coinIco',
+			name: 'cashIco',
 			texture: this.settings.cashTexture,
-			position: movePoint(resultCachePosition, [130, 0])
+			position: movePoint(resultCachePosition, [-120, 0]),
 		})
 		this.cashIco.sprite.anchor.set(0.5, 0.5)
 		this.container.addChild(this.cashIco.sprite)

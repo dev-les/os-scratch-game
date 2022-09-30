@@ -57,7 +57,7 @@ class StartGameStage {
 		const { scene } = this.viewPort
 
 		scene.addChild(this.backgroundContainer.view)
-		scene.addChild(this.charContainer.view)
+		// scene.addChild(this.charContainer.view)
 		scene.addChild(this.winUpContainer.view)
 		scene.addChild(this.scratchesContainer.view)
 		scene.addChild(this.notificationContainer.view)

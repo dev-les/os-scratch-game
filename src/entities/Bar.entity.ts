@@ -29,9 +29,9 @@ export class BarEntity {
 	protected btnBgPlaySprite: Sprite
 	protected btnPlayPosition: Array<number> = [25, 235]
 	protected btnPlayText: Text
-	protected btnPlayLabelPosition: Array<number> = [350, 285]
+	protected btnPlayLabelPosition: Array<number> = [500, 285]
 	protected linkRulesText: Text
-	protected linkRulesLabelPosition: Array<number> = [430, 115]
+	protected linkRulesLabelPosition: Array<number> = [350, 115]
 	protected speedAnimation: number
 	protected animation: TweenMax
 
@@ -93,7 +93,7 @@ export class BarEntity {
 		this.btnBgPlaySprite.interactive = true
 		this.btnBgPlaySprite.buttonMode = true
 
-		this.btnPlayText = new Text('Play for 60', new TextStyle(btnLabelStyle))
+		this.btnPlayText = new Text('Play', new TextStyle(btnLabelStyle))
 		this.btnPlayText.name = 'Play for 60'
 
 		this.linkRulesText = new Text('How To Play', new TextStyle(btnOrangeStyle))

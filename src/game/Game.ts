@@ -8,8 +8,8 @@ import { ASSETS_IS_LOADED } from '../core/assetsLoader/types';
 import { onEvent, onClearEvent } from '../utils/store.subscribe';
 import StartGameStage from '../stages/StartGame.stage';
 import ViewPort from '../core/viewPort/ViewPort';
-import { OPEN_SCRATCH, SCRATCHES_RESTORED } from '../containers/scratches/types';
-import { endRound, playAction, getBonusAction, getWinAction, startRoundAction } from './actions';
+import {  OPEN_SCRATCH, SCRATCHES_RESTORED } from '../containers/scratches/types';
+import { endRound, playAction, getWinAction, startRoundAction } from './actions';
 import { initStartGameAction } from '../stages/action';
 import { INITIATED_START_GAME_STAGE } from '../stages/types';
 import { showModalWindowAction } from '../containers/modalWindow/actions';
@@ -89,22 +89,16 @@ class Game {
 		dispatch(resetScratchesAction())
 	}
 
-	protected openScratch(payload: { id: number }): void {
+	protected openScratch(): void {
+		const { scratchesReducer } = this.store.getState()
 		const { dispatch } = this.store
-		const specialCardId = this.config.getSpecialCardId()
-		const { id } = payload
-		let bonus: BonusType
-		if (id !== specialCardId) {
-			bonus = this.generateBonusForCard()
-		} else {
-			bonus = this.generateBonusForWinner()
+		if (scratchesReducer.allIsOpen) {
+			this.viewPort.addTickOnce(() => {
+				_.delay(() => {
+					dispatch(endRound())
+				}, this.config.getWaitTime(TIMING.MEDIUM))
+			})
 		}
-		this.viewPort.addTickOnce(() => {
-			dispatch(getBonusAction({
-				id,
-				bonus,
-			}))
-		})
 	}
 
 	protected onGetBonus(payload: { id: number, bonus: BonusType }): void {
@@ -154,6 +148,55 @@ class Game {
 			return BonusType.Bonfire
 		}
 		return BonusType.Lose // 70%
+	}
+
+	protected getluck(): BonusType {
+		const dice = this.toDice()
+		if (dice <= 30) { //30%
+			//Free Shipping
+			console.log(`Won Free Shipping! dice: ${dice}`)
+			return BonusType.Bonfire
+		} 
+		if (dice <= 40) { //10%
+			//$5 Discount
+			console.log(`Won $5! dice: ${dice}`)
+			return BonusType.Bow
+		}
+		if (dice <= 45) { //5%
+			//$10 Discount
+			console.log(`Won $10! dice: ${dice}`)
+			return BonusType.Leaf
+		}
+		if (dice <= 48) { //3%
+			//$15 Discount
+			console.log(`Won $15! dice: ${dice}`)
+			return BonusType.Rope
+		}
+		if (dice <= 50) { //2%
+			//$10 Discount
+			const dice2 = this.toDice()
+			if(dice2 < 8){ //8%
+				//$100 discount
+				console.log(`Won $100! dice2: ${dice2}`)
+				return BonusType.Tent
+			}
+			if (dice2 < 25){//17%
+				//$50 discount
+				console.log(`Won $50 dice2: ${dice2}`)
+				return BonusType.Tent
+			}
+			if (dice2 < 50){//25%
+				//$25 discount
+				console.log(`Won $25 dice2: ${dice2}`)
+				return BonusType.Tent
+			}
+			//50%
+			//$20 discount
+			console.log(`Won $20 dice2: ${dice2}`)
+			return BonusType.Tent
+		}
+		console.log(`No Win dice: ${dice}`)
+		return BonusType.Lose //Lose
 	}
 
 	protected toDice(): number {

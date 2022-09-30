@@ -95,7 +95,7 @@ class ModalWindowContainer extends ABaseContainer {
 			speedAnimation: this.config.getWaitTime(TIMING.LOW_SEC),
 			bgFrame: bgFrameAsset.texture,
 			position,
-			hidePosition: [position[0], -500],
+			hidePosition: [position[0], -1000],
 			labelCorrect: [500, 100],
 			coinTexture: coinAsset.texture,
 			cashTexture: cashAsset.texture,
@@ -152,15 +152,22 @@ class ModalWindowContainer extends ABaseContainer {
 		this.viewPort.addTickOnce(() => {
 			this.container.visible = true
 
-			const { gameReducer } = this.store.getState()
-			const haveRoundWin = gameReducer.roundWin.coin > 0 || gameReducer.roundWin.cash > 0
-			if (haveRoundWin) {
-				this.winModalEntity.setWinValue(gameReducer.roundWin)
-				this.winModalEntity.show()
+			const { gameReducer, scratchesReducer } = this.store.getState()
+			const haveWin = gameReducer.win.coin > 0 || gameReducer.win.cash > 0
+			if(scratchesReducer.allIsOpen){
+				if (haveWin) {
+					const winAmount = gameReducer.win
+					this.winModalEntity.setWinValue(winAmount)
+					this.winModalEntity.show()
+				}
+				else {
+					this.winModalEntity.setLoseValue()
+					this.winModalEntity.show()
+				}
 			}
 
 			this.barEntity.show()
-			this.bgAnimation.play()
+			// this.bgAnimation.play()
 		}, this)
 	}
 

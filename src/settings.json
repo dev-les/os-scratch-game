@@ -25,6 +25,18 @@
 		"img/magic_forest_leaf_small.png",
 		"img/magic_forest_rope.png",
 		"img/magic_forest_rope_small.png",
+		"img/free_shipping.png",
+		"img/5-dollars.png",
+		"img/10-dollars.png",
+		"img/15-dollars.png",
+		"img/20-dollars.png",
+		"img/25-dollars.png",
+		"img/50-dollars.png",
+		"img/100-dollars.png",
+		"img/20-dollars-bg.png",
+		"img/25-dollars-bg.png",
+		"img/50-dollars-bg.png",
+		"img/100-dollars-bg.png",
 		"spine/char_spine_v5/Red.json"
 	],
 	"fonts": {
@@ -47,88 +59,92 @@
 		{
 			"bonusId": 0,
 			"win": {
-				"coin": 25,
-				"cash": 0
+				"coin": 0,
+				"cash": 1
 			}
 		},
 		{
 			"bonusId": 1,
 			"win": {
-				"coin": 30,
-				"cash": 0
+				"coin": 0,
+				"cash": 5
 			}
 		},
 		{
 			"bonusId": 2,
 			"win": {
-				"coin": 35,
-				"cash": 0
+				"coin": 0,
+				"cash": 10
 			}
 		},
 		{
 			"bonusId": 3,
 			"win": {
-				"coin": 50,
-				"cash": 0
+				"coin": 0,
+				"cash": 15
 			}
 		},
 		{
 			"bonusId": 4,
 			"win": {
-				"coin": 100,
-				"cash": 0
+				"coin": 0,
+				"cash": 20
 			}
 		},
 		{
 			"bonusId": 5,
 			"win": {
-				"coin": 25,
-				"cash": 0
+				"coin": 0,
+				"cash": 50
 			}
 		},
 		{
 			"bonusId": 6,
 			"win": {
 				"coin": 0,
-				"cash": 1
+				"cash": 25
 			}
 		},
 		{
 			"bonusId": 7,
 			"win": {
 				"coin": 0,
-				"cash": 0
+				"cash": 100
 			}
 		}
 	],
 	"bonusImages": [
 		[
-			"img/magic_forest_bonfire_small",
+			"img/free_shipping",
 			"img/magic_forest_bonfire"
 		],
 		[
-			"img/magic_forest_bow_small",
+			"img/5-dollars",
 			"img/magic_forest_bow"
 		],
 		[
-			"img/magic_forest_leaf_small",
+			"img/10-dollars",
 			"img/magic_forest_leaf"
 		],
 		[
-			"img/magic_forest_rope_small",
+			"img/15-dollars",
 			"img/magic_forest_rope"
 		],
 		[
-			"img/magic_forest_tent_small",
-			"img/magic_forest_tent"
+			"img/20-dollars",
+			"img/20-dollars-bg"
 		],
 		[
-			"img/magic_forest_coin_icon_small",
-			"img/magic_forest_coin_icon_big"
+			"img/25-dollars",
+			"img/25-dollars-bg"
 		],
 		[
-			"",
-			"img/magic_forest_dollar_icon"
+			"img/50-dollars",
+			"img/50-dollars-bg"
+		],
+		[
+			"img/100-dollars",
+			"img/100-dollars-bg"
 		]
 	],
 	"waitTime": {
